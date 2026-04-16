@@ -1,0 +1,13 @@
+{
+  "keys": {
+    "dial_api_key": {
+      "project": "DIAL-COURSE-FOR-DEVELOPERS",
+      "role": "default"
+    }
+  },
+  "roles": {
+    "default": {
+      "limits": {}
+    }
+  }
+}

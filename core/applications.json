@@ -1,0 +1,73 @@
+{
+  "applications": {
+    "echo": {
+      "displayName": "My Echo App",
+      "description": "Simple application that repeats user's message",
+      "endpoint": "http://host.docker.internal:5022/openai/deployments/echo/chat/completions"
+    },
+    "essay-assistant-gpt": {
+      "displayName": "Essay Assistant",
+      "displayVersion": "gpt-5.2",
+      "description": "Essay Assistant. Always answers with essay.",
+      "endpoint": "http://host.docker.internal:5025/openai/deployments/essay-assistant-gpt/chat/completions",
+      "features": {
+        "configurationEndpoint": "http://host.docker.internal:5025/openai/deployments/essay-assistant-gpt/configuration"
+      }
+    },
+    "essay-assistant-sonnet": {
+      "displayName": "Essay Assistant",
+      "displayVersion": "sonnet-4.6",
+      "description": "Essay Assistant. Always answers with essay.",
+      "endpoint": "http://host.docker.internal:5026/openai/deployments/essay-assistant-sonnet/chat/completions",
+      "features": {
+        "configurationEndpoint": "http://host.docker.internal:5026/openai/deployments/essay-assistant-sonnet/configuration"
+      }
+    },
+    "poem-assistant": {
+      "displayName": "Poem Assistant",
+      "description": "Poem Assistant. Always answers with poem.",
+      "endpoint": "http://host.docker.internal:5027/openai/deployments/poem-assistant/chat/completions"
+    },
+    "calculator-agent": {
+      "displayName": "Calculator Agent",
+      "description": "AI assistant that can answer general questions and perform mathematical calculations.",
+      "endpoint": "http://host.docker.internal:5028/openai/deployments/calculator-agent/chat/completions"
+    },
+    "files-assistant": {
+      "displayName": "Files Agent",
+      "description": "AI assistant that can answer general questions, works with pictures as input content, and converts answers to audio",
+      "endpoint": "http://host.docker.internal:5029/openai/deployments/files-assistant/chat/completions",
+      "inputAttachmentTypes": [
+        "image/png",
+        "image/jpg"
+      ],
+      "maxInputAttachments": 3
+    },
+    "microwave-rag": {
+      "displayName": "Microwave RAG",
+      "description": "RAG assistant that can answer questions about microwave usage.",
+      "endpoint": "http://host.docker.internal:5030/openai/deployments/microwave-rag/chat/completions"
+    },
+    "buttons-sample": {
+      "displayName": "Button-Driven Application",
+      "description": "Demonstrates DIAL buttons capabilities",
+      "endpoint": "http://host.docker.internal:5031/openai/deployments/buttons-sample/chat/completions",
+      "features": {
+        "configurationEndpoint": "http://host.docker.internal:5031/openai/deployments/buttons-sample/configuration"
+      }
+    },
+    "final-task-agent": {
+      "displayName": "Final task Agent",
+      "description": "Agent equipped with Microwave RAG tool, Image-generation tool, Essay-generation tool and Buttons creation tool.",
+      "endpoint": "http://host.docker.internal:5032/openai/deployments/final-task-agent/chat/completions",
+      "features": {
+        "configurationEndpoint": "http://host.docker.internal:5032/openai/deployments/final-task-agent/configuration"
+      },
+      "inputAttachmentTypes": [
+        "image/png",
+        "image/jpg"
+      ],
+      "maxInputAttachments": 3
+    }
+  }
+}
