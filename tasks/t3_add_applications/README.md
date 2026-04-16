@@ -36,18 +36,9 @@ In this task we will build and register two custom applications in DIAL using th
 **DIAL allows you to call other models from within your application. `EssayAssistantApplication` uses DIAL Client to
 forward requests to an LLM deployed in DIAL Core — your app acts as a middleware.**
 
-1. Open [essay/essay_assistant.py](essay/essay_assistant.py) and implement the TODO blocks:
-    - Create an `AsyncDial` client pointed at `http://localhost:8080` with `api_key="dial_api_key"` and
-      `api_version="2025-01-01-preview"`
-    - Open a single-choice response with `response.create_single_choice()`
-    - Call `client.chat.completions.create(deployment_name=self.model, stream=True, messages=[...])` — pass the system
-      prompt and the last user message
-    - Iterate `async for chunk in chunks` and call `choice.append_content(delta.content)` for each chunk that has
-      content
+1. Open [essay/essay_assistant.py](essay/essay_assistant.py) and implement the **TODO blocks**.
 
-2. Open [essay/app_gpt.py](essay/app_gpt.py) and implement the TODO:
-    - Create a `DIALApp`, register `EssayAssistantApplication("gpt-5.2")` under deployment name `"essay-assistant-gpt"`,
-      and run on port `5025`
+2. Open [essay/app_gpt.py](essay/app_gpt.py) and implement the **TODO**.
 
 3. Open [applications.json](/core/applications.json) and add to the `"applications"` section:
    ```json
@@ -85,9 +76,7 @@ forward requests to an LLM deployed in DIAL Core — your app acts as a middlewa
 **DIAL is vendor-agnostic — switching from GPT to Claude Sonnet requires zero changes to the application logic
 in `essay_assistant.py`. Only the model name and port differ.**
 
-1. Open [essay/app_sonnet.py](essay/app_sonnet.py) and implement the TODO:
-    - Create a `DIALApp`, register `EssayAssistantApplication("claude-sonnet-4-6")` under deployment name
-      `"essay-assistant-sonnet"`, and run on port `5026`
+1. Open [essay/app_sonnet.py](essay/app_sonnet.py) and implement the **TODO**.
 
 2. Open [applications.json](/core/applications.json) and add to the `"applications"` section:
    ```json

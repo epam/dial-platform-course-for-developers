@@ -15,7 +15,27 @@ explore a fully button-driven ordering flow.
 
 1. **Open [t3_add_applications/essay/essay_assistant.py](../t3_add_applications/essay/essay_assistant.py)**
 
-   Add the following `configuration` method to the `EssayAssistantApplication` class, after `chat_completion`:
+   Add a `configuration` method to the `EssayAssistantApplication` class after `chat_completion`. The method must
+   return a JSON Schema dict that renders conversation starter buttons in DIAL Chat.
+
+   First, add these imports at the top of the file:
+   ```python
+   from typing import Union
+   from aidial_sdk.deployment.configuration import ConfigurationRequest, ConfigurationResponse
+   ```
+
+   The method signature:
+   ```python
+   async def configuration(self, request: ConfigurationRequest) -> Union[ConfigurationResponse, dict]:
+   ```
+
+   The returned schema must have:
+   - `"type": "object"` and a `"properties"` section
+   - A property using `"dial:widget": "buttons"` with a `"oneOf"` list of button definitions
+   - Each button entry has `"const"`, `"title"`, and `"dial:widgetOptions": {"populateText": "..."}`
+
+   Below is a two-button skeleton to get you started. **Your task: add a third button** —
+   *"About a cat that plays guitar"* — with a suitable `populateText` value:
 
    ```python
    async def configuration(self, request: ConfigurationRequest) -> Union[ConfigurationResponse, dict]:
@@ -37,19 +57,12 @@ explore a fully button-driven ordering flow.
                            "title": "About dog that can sing",
                            "dial:widgetOptions": {"populateText": "Generate essay about dog that can sing"}
                        }
+                       # TODO: add a third button here — "About a cat that plays guitar"
                    ]
                }
            }
        }
    ```
-
-   The imports at the top of the file already include everything needed:
-   ```python
-   from typing import Union
-   from aidial_sdk.deployment.configuration import ConfigurationRequest, ConfigurationResponse
-   ```
-
-   **Your task:** Add a **third button** — *"About a cat that plays guitar"* — with a suitable `populateText` value.
 
    **Experiment 1:** Change one of the buttons from `populateText` to `"submit": True`. Notice how the behavior differs:
    `populateText` fills the chat input for editing before sending; `submit: True` sends the form immediately on click.

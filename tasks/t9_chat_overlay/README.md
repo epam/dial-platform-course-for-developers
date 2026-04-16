@@ -31,7 +31,7 @@ More details of [Chat Overlay](https://github.com/epam/ai-dial-chat/blob/develop
    ```bash
    npm i @epam/ai-dial-overlay
    ``` 
-6. Replace content in `overlay-app/src/main.js` [main.js](/overlay-app/src/main.js) to:
+6. Replace content in [overlay-app/src/main.js](/overlay-app/src/main.js) to:
    ```js
    import './style.css'
    import { ChatOverlay } from "@epam/ai-dial-overlay";
@@ -125,12 +125,265 @@ More details of [Chat Overlay](https://github.com/epam/ai-dial-chat/blob/develop
    
    run();
    ```
-7. Run in terminal (to run overlay app):
+   
+7. Replace content in [overlay-app/src/style.css](/overlay-app/src/style.css) to:
+   ```css
+   /* ============================================================
+      Reset & base
+      ============================================================ */
+   *, *::before, *::after {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+   }
+   
+   html, body {
+     height: 100%;
+     overflow: hidden;
+     font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     background: #0f1117;
+     color: #94a3b8;
+   }
+   
+   /* ============================================================
+      Root layout — flex row splits viewport ~70 / ~30
+      ============================================================ */
+   #app {
+     display: flex;
+     flex-direction: row;
+     height: 100%;
+     width: 100%;
+     overflow: hidden;
+   }
+   
+   /* ============================================================
+      Left panel — main application placeholder (~70%)
+      ============================================================ */
+   .main-panel {
+     flex: 1 1 0;
+     min-width: 0;
+     display: flex;
+     flex-direction: column;
+     background-color: #0f1117;
+     background-image: radial-gradient(circle, #1e2130 1px, transparent 1px);
+     background-size: 28px 28px;
+     overflow: hidden;
+     position: relative;
+   }
+   
+   /* Mock app header */
+   .app-header {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0 24px;
+     height: 56px;
+     flex-shrink: 0;
+     background: rgba(15, 17, 23, 0.9);
+     backdrop-filter: blur(8px);
+     border-bottom: 1px solid #1e2130;
+     position: relative;
+     z-index: 1;
+   }
+   
+   .header-brand {
+     display: flex;
+     align-items: center;
+     gap: 32px;
+   }
+   
+   .brand-logo {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+   }
+   
+   .brand-name {
+     font-size: 15px;
+     font-weight: 600;
+     color: #e2e8f0;
+     letter-spacing: 0.3px;
+   }
+   
+   .header-nav {
+     display: flex;
+     align-items: center;
+     gap: 4px;
+   }
+   
+   .nav-link {
+     color: #64748b;
+     text-decoration: none;
+     font-size: 13px;
+     font-weight: 500;
+     padding: 6px 12px;
+     border-radius: 6px;
+     transition: color 0.15s, background 0.15s;
+   }
+   
+   .nav-link:hover {
+     color: #cbd5e1;
+     background: #1e2130;
+   }
+   
+   .header-actions {
+     display: flex;
+     align-items: center;
+   }
+   
+   .user-badge {
+     font-size: 11px;
+     font-weight: 600;
+     letter-spacing: 0.5px;
+     text-transform: uppercase;
+     color: #475569;
+     background: #1e2130;
+     border: 1px solid #2d3148;
+     padding: 4px 10px;
+     border-radius: 20px;
+   }
+   
+   /* Centered placeholder content */
+   .main-content {
+     flex: 1 1 0;
+     min-height: 0;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     gap: 20px;
+     padding: 40px 60px;
+     text-align: center;
+   }
+   
+   .placeholder-icon {
+     margin-bottom: 4px;
+     opacity: 0.7;
+   }
+   
+   .placeholder-title {
+     font-size: 22px;
+     font-weight: 500;
+     color: #cbd5e1;
+     letter-spacing: -0.3px;
+     line-height: 1.3;
+   }
+   
+   .placeholder-subtitle {
+     font-size: 14px;
+     line-height: 1.7;
+     color: #475569;
+     max-width: 460px;
+   }
+   
+   .placeholder-tags {
+     display: flex;
+     gap: 10px;
+     flex-wrap: wrap;
+     justify-content: center;
+     margin-top: 8px;
+   }
+   
+   .tag {
+     font-size: 11px;
+     font-weight: 600;
+     letter-spacing: 0.5px;
+     text-transform: uppercase;
+     color: #3b82f6;
+     background: rgba(59, 130, 246, 0.08);
+     border: 1px solid rgba(59, 130, 246, 0.2);
+     padding: 5px 12px;
+     border-radius: 20px;
+   }
+   
+   /* ============================================================
+      Right panel — DIAL chat sidebar (40%)
+      ============================================================ */
+   .chat-panel {
+     width: 40%;
+     flex-shrink: 0;
+     display: flex;
+     flex-direction: column;
+     height: 100%;
+     background: #13141a;
+     border-left: 1px solid #1e2130;
+     overflow: hidden;
+   }
+   
+   .chat-header {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0 16px;
+     height: 48px;
+     flex-shrink: 0;
+     background: #13141a;
+     border-bottom: 1px solid #1e2130;
+   }
+   
+   .chat-header-left {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+   }
+   
+   .status-dot {
+     width: 8px;
+     height: 8px;
+     border-radius: 50%;
+     background: #22c55e;
+     box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+     flex-shrink: 0;
+   }
+   
+   .chat-title {
+     font-size: 13px;
+     font-weight: 600;
+     color: #e2e8f0;
+     letter-spacing: 0.2px;
+   }
+   
+   .powered-badge {
+     font-size: 9px;
+     font-weight: 700;
+     letter-spacing: 1px;
+     text-transform: uppercase;
+     color: #475569;
+     background: #1e2130;
+     border: 1px solid #2d3148;
+     padding: 3px 8px;
+     border-radius: 4px;
+   }
+   
+   /* CRITICAL: height chain must be fully computed for the iframe to render.
+      min-height: 0 overrides flex's implicit min-height: auto,
+      allowing the container to shrink and the iframe to fill it. */
+   #chat-container {
+     flex: 1;
+     min-height: 0;
+     overflow: hidden;
+     display: flex;
+     flex-direction: column;
+     background: #13141a;
+   }
+   
+   #chat-container iframe {
+     width: 100% !important;
+     height: 100% !important;
+     border: none;
+     display: block;
+   }
+   ```
+   
+8. Run in terminal (to run overlay app):
    ```bash
    npm run dev
    ```
-8. Delete `chat` container and run it again (to fetch new env variables)
-9. Open http://localhost:5173/ in browser and test it
+9. Delete `chat` container and run it again (to fetch new env variables)
+
+10. Open http://localhost:5173/ in browser and test it
 
 <details><summary>Result samples</summary>
 

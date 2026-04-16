@@ -55,3 +55,36 @@ protocol.
 | [t9](tasks/t9_chat_overlay/README.md)              | Chat Overlay *(optional)* | Embed DIAL Chat into an external web page via the overlay library      |
 | [t10](tasks/t10_agent/README.md)                   | Agent — Capstone          | Build a multi-tool streaming agent combining all platform capabilities |
 
+---
+
+## Getting Started
+
+### 0. ⭐️ **Star the repository** - it will help us grow ⭐️
+
+### 1. ⑃ Fork and clone the repository
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv .venv
+```
+
+### 3. Activate the virtual environment
+
+**macOS / Linux:**
+
+```bash
+source .venv/bin/activate
+```
+
+**Windows:**
+
+```bash
+.venv\Scripts\activate
+```
+
+### 4. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```

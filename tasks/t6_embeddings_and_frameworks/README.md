@@ -77,53 +77,9 @@ Assistant reply
    )
    ```
 
-4. **Implement TODO 3 — body of `retrieve_context`**
+4. **Implement TODO 3 — body of `retrieve_context`** in [rag_app.py](rag_app.py)
 
-   After the stage is opened and the query is appended, perform the similarity search and build the context string:
-
-    - Call `self.vectorstore.similarity_search_with_relevance_scores(query, k=k, score_threshold=score)` →
-      `relevant_docs`
-    - Iterate over `relevant_docs` — each item is a `(doc, score)` tuple; collect `doc.page_content` into
-      `context_parts`
-    - Join with `"\n\n"` to produce `result`
-    - Append `result` to the stage content, close the stage safely, return `result`
-
-   ```python
-   relevant_docs = self.vectorstore.similarity_search_with_relevance_scores(
-       query,
-       k=k,
-       score_threshold=score,
-   )
-
-   context_parts = []
-   for (doc, score) in relevant_docs:
-       context_parts.append(doc.page_content)
-
-   result = "\n\n".join(context_parts)
-   stage.append_content(f"## Result:\n```\n{result}\n```\n\n")
-   _StageProcessor.close_stage_safely(stage)
-
-   return result
-   ```
-
-5. **Implement TODO 4 — body of `chat_completion`** (inside `with response.create_single_choice() as choice:`)
-
-   After `retrieved_context` is obtained, build the RAG prompt and stream the LLM response:
-
-    - Build a `messages` list with a `SystemMessage` and a `HumanMessage` that embeds the context and query
-    - Stream the response from `self.llm_client.astream(messages)` and forward each content chunk to `choice`
-
-   ```python
-   messages = [
-       SystemMessage(content=SYSTEM_PROMPT),
-       HumanMessage(content=f"## Context:\n {retrieved_context}\n\n## Query: \n{message_content}"),
-   ]
-   chunks = self.llm_client.astream(messages)
-
-   async for chunk in chunks:
-       if content := chunk.content:
-           choice.append_content(content)
-   ```
+5. **Implement TODO 4 — body of `chat_completion`** in [rag_app.py](rag_app.py)
 
 6. **Open [core/applications.json](/core/applications.json) and add this app config**:
 

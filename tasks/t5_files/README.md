@@ -42,37 +42,10 @@ Assistant reply + audio attachment
    | `show_attachments_in_stage(choice, request)` | Reads incoming attachments; renders image previews in stages |
    | `response_to_audio(client, content, choice)` | Calls TTS model; forwards audio attachment to `choice` |
 
-2. **Implement the TODO blocks in [t5_files/files_assistant.py](t5_files/files_assistant.py)**
+2. **Implement the TODO blocks in [files_assistant.py](files_assistant.py)**
 
-   **TODO1 — `show_attachments_in_stage`**
-
-   Read the incoming attachments from the last message and display each one in its own stage:
-    - Access `request.messages[-1].custom_content.attachments` (guard for `None`)
-    - For each attachment, open a stage: `_StageProcessor.open_stage(choice, "Attachment content: ")`
-    - If the attachment has a title, append it to the stage header:
-      ```python
-      stage.append_name(attachment.title)
-      ```
-    - For image types (`"image/png"`, `"image/jpg"`), render a markdown image preview using the attachment URL:
-      ```python
-      stage.append_content(f"\n\r![image]({attachment.url})\n\r")
-      ```
-    - For all other types:
-      ```python
-      stage.append_content(f"Unsupported attachment type: {attachment.type}")
-      ```
-    - Always close the stage in a `finally` block
-
-   **TODO2 — audio attachment forwarding inside `response_to_audio`**
-
-   Read audio attachment(s) from the TTS model response and add them to both the stage and the choice:
-    - Guard `audio_content.choices[0].message.custom_content` for `None`
-    - Guard `.attachments` for `None`
-    - For each attachment:
-      ```python
-      stage.add_attachment(**attachment.model_dump())
-      choice.add_attachment(**attachment.model_dump())
-      ```
+   - Implement **TODO1** — `show_attachments_in_stage()`
+   - Implement **TODO2** — audio attachment forwarding inside `response_to_audio()`
 
 3. **Open [core/applications.json](/core/applications.json) and add such app config**:
    ```json

@@ -18,20 +18,7 @@ You must always close a stage — even when an error occurs — otherwise the re
 
 ### Steps
 
-1. Open [t1_simple/poem_assistant.py](t1_simple/poem_assistant.py) and implement the **two TODO blocks**:
-
-   **TODO 1 — Greeting Stage** (place it inside `create_single_choice`, before the LLM call):
-    - Create a stage named `"Greeting Stage"` via `choice.create_stage("Greeting Stage")`
-    - Call `.open()` on it
-    - Call `.append_content("Hello from Poem Assistant")`
-    - Call `.close()`
-
-   **TODO 2 — Usage Stage** (place it inside the `async for chunk` loop, in the branch where `chunk.usage` is present
-   and there is no delta content):
-    - Create a stage named `f"Usage: {self.model}"` via `choice.create_stage(...)`
-    - Call `.open()` on it
-    - Call `.append_content(usage.dict(exclude_none=True))` — passing a `dict` renders as a key-value table in Chat
-    - Call `.close()`
+1. Open [t1_simple/poem_assistant.py](t1_simple/poem_assistant.py) and implement the **two TODO blocks**.
 
 2. Open [core/applications.json](/core/applications.json) and confirm the following entry is present in the
    `"applications"` section (add it if missing):
@@ -102,51 +89,13 @@ history in state → Core sends it back → the app unpacks it server-side and i
       when it finds an assistant message it reads `custom_content.state` and injects the saved tool/assistant messages
       back into the sequence so the LLM receives the full history
 
-2. **Implement TODO1 in [t2_calculator_agent/calculator_tool.py](t2_calculator_agent/calculator_tool.py) — `execute()`
-   method**
-
-   A `stage` object is passed in from the agent. Use it to show the expression and result:
-    - `stage.append_name(f": {expression}")` — appends the expression to the stage header (Chat will show e.g.
-      `calculate: 10 * (3 + 5)`)
-    - `stage.append_content(f"## Expression:\n```\n{expression}\n```\n\n")` — show the expression in a code block
-    - After calling `self._calculate(expression)`, append: `stage.append_content(f"## Result:\n\`{result}\`\n")`
+2. **Implement the TODO in [t2_calculator_agent/calculator_tool.py](t2_calculator_agent/calculator_tool.py) — `execute()` method**
 
 3. **Implement TODO1 in [t2_calculator_agent/agent.py](t2_calculator_agent/agent.py) — `_process_tool_call()` method**
 
-   Wrap the tool execution in a stage:
-    - Open the stage: `stage = StageProcessor.open_stage(choice, tool_call.function.name)`
-    - Append the arguments before calling the tool:
-      ```python
-      stage.append_content(
-          f"## Arguments:\n```json\n"
-          f"{json.dumps(json.loads(tool_call.function.arguments), indent=2)}\n"
-          f"```\n\n"
-      )
-      ```
-    - Call `tool_message = await tool.execute(tool_call, stage)` — the tool continues filling the stage
-    - In the `finally` block: `StageProcessor.close_stage_safely(stage)`
-
-4. **Implement TODO2 in [t2_calculator_agent/agent.py](t2_calculator_agent/agent.py) — `handle_request()` method**
-
-   After all `tool_messages` are gathered (still inside the `if assistant_message.tool_calls:` branch), save the
-   exchange to state before recursing:
-   ```python
-   self.state[TOOL_CALL_HISTORY_KEY].append(assistant_message.dict(exclude_none=True))
-   self.state[TOOL_CALL_HISTORY_KEY].extend(tool_messages)
-   ```
-
-   At the end of `handle_request`, after the recursion returns (and in the no-tool-calls branch), attach state to the
-   response:
-   ```python
-   choice.set_state(self.state)
-   ```
+4. **Implement TODO2 in [t2_calculator_agent/agent.py](t2_calculator_agent/agent.py) — `handle_request()` method** (state saving and `choice.set_state()`)
 
 5. **Implement the TODO in [t2_calculator_agent/app.py](t2_calculator_agent/app.py)**
-
-   Wire up the DIAL app:
-    - Create a `DIALApp` instance
-    - Register `CalculatorAgentApplication()` under deployment name `"calculator-agent"` using `app.add_chat_completion`
-    - Run with `uvicorn` on port `5028`, host `"0.0.0.0"`
 
 6. Open [core/applications.json](/core/applications.json) and confirm the following entry is present (add it if
    missing):
