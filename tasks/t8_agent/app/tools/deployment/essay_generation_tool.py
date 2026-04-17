@@ -1,21 +1,21 @@
 from typing import Any
 
-from tasks.t10_agent.app.tools.deployment.base import DeploymentTool
+from tasks.t8_agent.app.tools.deployment.base import DeploymentTool
 
 
-class MicrowaveRagTool(DeploymentTool):
+class EssayGenerationTool(DeploymentTool):
 
     @property
     def deployment_name(self) -> str:
-        return "microwave-rag"
+        return "essay-assistant-gpt"
 
     @property
     def name(self) -> str:
-        return "microwave_rag_tool"
+        return "essay_generation_tool"
 
     @property
     def description(self) -> str:
-        return "Searches through microwave manual requested information."
+        return "Generates assay on demand."
 
     @property
     def parameters(self) -> dict[str, Any]:
@@ -24,7 +24,7 @@ class MicrowaveRagTool(DeploymentTool):
             "properties": {
                 "prompt": {
                     "type": "string",
-                    "description": "What to search."
+                    "description": "Extensive description of the essay that should be generated."
                 }
             },
             "required": [

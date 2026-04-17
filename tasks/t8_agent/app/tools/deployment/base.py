@@ -6,8 +6,8 @@ from aidial_client import AsyncDial
 from aidial_sdk.chat_completion import Message, Role, CustomContent
 from pydantic import StrictStr
 
-from tasks.t10_agent.app.tools.base import BaseTool
-from tasks.t10_agent.app.tools.models import ToolCallParams
+from tasks.t8_agent.app.tools.base import BaseTool
+from tasks.t8_agent.app.tools.models import ToolCallParams
 
 
 class DeploymentTool(BaseTool, ABC):

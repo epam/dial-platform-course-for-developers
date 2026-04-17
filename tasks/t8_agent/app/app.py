@@ -8,10 +8,10 @@ from aidial_sdk.chat_completion import (
 )
 from aidial_sdk.deployment.configuration import ConfigurationRequest, ConfigurationResponse
 
-from tasks.t10_agent.app.agent import Agent
-from tasks.t10_agent.app.tools.deployment.essay_generation_tool import EssayGenerationTool
-from tasks.t10_agent.app.tools.deployment.image_generation_tool import ImageGenerationTool
-from tasks.t10_agent.app.tools.deployment.microwave_rag_tool import MicrowaveRagTool
+from tasks.t8_agent.app.agent import Agent
+from tasks.t8_agent.app.tools.deployment.essay_generation_tool import EssayGenerationTool
+from tasks.t8_agent.app.tools.deployment.image_generation_tool import ImageGenerationTool
+from tasks.t8_agent.app.tools.deployment.microwave_rag_tool import MicrowaveRagTool
 
 _DIAL_CORE_URL="http://localhost:8080"
 

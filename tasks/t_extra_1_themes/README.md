@@ -32,7 +32,7 @@ In this task you will add a **Pink & Sky** theme to your local DIAL environment.
        - ./tasks/t8_themes/themes-config.json:/var/www/config.json:ro
    ```
 
-2. **Add the Pink & Sky theme** to [`themes-config.json`](themes-config.json) inside the
+2. **Add the Pink & Sky theme** to [themes-config.json](themes-config.json) inside the
    `"themes"` array:
 
    ```json
@@ -202,7 +202,7 @@ will silently replace the built-in theme with the same ID. Always use a distinct
 
 Design and register a completely custom color scheme:
 
-1. In [`themes-config.json`](themes-config.json) add a new object to the `"themes"` array.
+1. In [themes-config.json](themes-config.json) add a new object to the `"themes"` array.
    Copy the **Pink & Sky** or **Light** theme as a starting point.
 
 2. Choose your own `displayName`, a unique `id` slug, and replace the hex color values.

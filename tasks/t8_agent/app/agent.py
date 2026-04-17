@@ -5,9 +5,9 @@ from typing import Any
 from aidial_client import AsyncDial
 from aidial_sdk.chat_completion import Choice, Message, Role, Request, ToolCall
 
-from tasks.t10_agent.app.tools.base import BaseTool
-from tasks.t10_agent.app.tools.models import ToolCallParams
-from tasks.t10_agent.app.utils import StageProcessor, unpack_messages
+from tasks.t8_agent.app.tools.base import BaseTool
+from tasks.t8_agent.app.tools.models import ToolCallParams
+from tasks.t8_agent.app.utils import StageProcessor, unpack_messages
 
 _TOOL_CALL_HISTORY_KEY = "tool_call_history"
 

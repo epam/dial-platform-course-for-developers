@@ -44,7 +44,7 @@ services:
     ports:
       - "3001:8080"
     volumes:
-      - ./tasks/t8_themes/themes-config.json:/var/www/config.json:ro
+      - ./tasks/t_extra_1_themes/themes-config.json:/var/www/config.json:ro
 
   chat:
     ports:

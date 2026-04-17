@@ -6,7 +6,7 @@ from aidial_client.types.chat.legacy.chat_completion import Role
 from aidial_sdk.chat_completion import Message
 from pydantic import StrictStr
 
-from tasks.t10_agent.app.tools.models import ToolCallParams
+from tasks.t8_agent.app.tools.models import ToolCallParams
 
 
 class BaseTool(ABC):

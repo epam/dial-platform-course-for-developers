@@ -3,8 +3,8 @@ from typing import Any
 from aidial_sdk.chat_completion import Message
 from pydantic import StrictStr
 
-from tasks.t10_agent.app.tools.deployment.base import DeploymentTool
-from tasks.t10_agent.app.tools.models import ToolCallParams
+from tasks.t8_agent.app.tools.deployment.base import DeploymentTool
+from tasks.t8_agent.app.tools.models import ToolCallParams
 
 
 class ImageGenerationTool(DeploymentTool):
