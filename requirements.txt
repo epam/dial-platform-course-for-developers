@@ -1,5 +1,5 @@
-aidial-sdk==0.34.0
-aidial-client==0.6.2
+aidial-sdk==0.37.0
+aidial-client==0.8.0
 langchain-community==0.4.1
-langchain-openai==1.1.12
+langchain-openai==1.2.2
 faiss-cpu==1.13.2
