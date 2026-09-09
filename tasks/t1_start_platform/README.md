@@ -27,7 +27,7 @@ Open [docker-compose.yml](/docker-compose.yml) and add:
        user: ${UID:-root}
        ports:
          - "8080:8080"
-       image: epam/ai-dial-core:latest
+       image: epam/ai-dial-core:0.46.0
        #platform: linux/amd64
        environment:
          'AIDIAL_SETTINGS': '/opt/settings/settings.json'
@@ -63,7 +63,7 @@ Open [docker-compose.yml](/docker-compose.yml) and add:
 1. [DIAL Chat Themes](https://hub.docker.com/r/epam/ai-dial-chat-themes/tags):
    ```yaml
      themes:
-       image: epam/ai-dial-chat-themes:latest
+       image: epam/ai-dial-chat-themes:0.19.0
        #platform: linux/amd64
        ports:
          - "3001:8080"
@@ -73,7 +73,7 @@ Open [docker-compose.yml](/docker-compose.yml) and add:
      chat:
        ports:
          - "3000:3000"
-       image: epam/ai-dial-chat:latest
+       image: epam/ai-dial-chat:0.49.0
        #platform: linux/amd64
        depends_on:
          - themes
